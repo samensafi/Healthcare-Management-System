@@ -3,19 +3,19 @@
 
 ## Requirements
 
-1- **streamlit**: for user interface
+1- **`streamlit`**: for user interface
 
-2- **cryptography**: for encryption in research module
-
-### Install the requirements by running:
-
-**pip install streamlit cryptography**
+2- **`cryptography`**: for encryption in research module
 
 
 ## Running
 
-### 1- Put all py files in the same directory
+### 1- Install the requirements using:
 
-### 2- Run this on the terminal:
+**`pip install streamlit cryptography`**
 
-**streamlit run streamlit_app.py**
+### 2- Put all of the files in the same directory
+
+### 2- Run this on your terminal:
+
+**`streamlit run streamlit_app.py`**
