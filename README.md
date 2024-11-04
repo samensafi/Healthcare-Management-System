@@ -23,7 +23,7 @@
 
 ## Actions
 
-### Medical Records
+### Medical Records - Sam Ensafi
 - Add Patient
 - View Patient Records
 - Add Medical Record
@@ -34,25 +34,25 @@
 - View Prescriptions
 - Clear All Records
 
-### Data Storage
+### Data Storage - Ahmet Soner Ozturk
 - Add Data to Central Storage
 - Retrieve Data from Central Storage
 - Clear Central Data Storage
 
-### Digital Transaction
+### Digital Transaction - Martin Kamburov
 - Link Patient Data for Interoperability
 - Update Insurance Automatically
 - Generate Direct Bill
 - View Billing Transactions
 - Clear All Transactions
 
-### Supply Chain Management
+### Supply Chain Management - Patrik Cunko
 - Track Drug
 - Authenticate Drug
 - View Drug Info
 - Clear Supply Chain Data
 
-### Research
+### Research - Mojtaba Khalesi
 - Add Research Subject
 - Retrieve Subject Data
 - Manage Clinical Trial
