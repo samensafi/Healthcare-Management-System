@@ -18,7 +18,7 @@ options = st.sidebar.selectbox("Choose an action", [
     "Add Patient", "View Patient Records", "Add Medical Record", 
     "Update Medical Record", "Add Prescription", "Verify Prescription", 
     "Verify Medical Entry", "View Prescriptions", "Clear All Records",
-    "Add Data to Central Storage", "Retrieve Data from Central Storage", "Clear Central Data Storage",
+    "Add Data to Blockchain", "Retrieve Data from Blockchain", "Clear Blockchain Data",
     "Link Patient Data for Interoperability", "Update Insurance Automatically", 
     "Generate Direct Bill", "View Billing Transactions", "Clear All Transactions",
     "Track Drug", "Authenticate Drug", "View Drug Info", "Clear Supply Chain Data",
@@ -102,32 +102,68 @@ elif options == "Clear All Records":
         result = clear_all_records()
         st.write(result)
 
+elif options == "Add Data to Blockchain":
+    st.subheader("Add Data to Blockchain")
+    
+    data_type = st.selectbox(
+        "Select Data Type",
+        ["patient", "medical_record", "transaction", "supply_chain"]
+    )
 
-# Data Storage Actions
-elif options == "Add Data to Central Storage":
-    st.subheader("Add Data to Central Storage")
-    data_type = st.selectbox("Data Type", ["medical_records", "prescriptions", "research_data"])
-    data_content = st.text_area("Data Content (in JSON format)")
-    if st.button("Add Data"):
-        try:
-            data_content = json.loads(data_content)  
-            result = add_data(data_type, data_content)
-            st.write(result)
-        except json.JSONDecodeError:
-            st.write("Invalid JSON format.")
+    if data_type == "patient":
+        patient_id = st.text_input("Patient ID")
+        name = st.text_input("Name")
+        age = st.number_input("Age", min_value=0, step=1)
+        if st.button("Add Patient"):
+            result = add_data("patient", patient_id=patient_id, name=name, age=age)
+            st.success(result)
 
-elif options == "Retrieve Data from Central Storage":
-    st.subheader("Retrieve Data from Central Storage")
-    data_type = st.selectbox("Data Type", ["medical_records", "prescriptions", "research_data"])
+    elif data_type == "medical_record":
+        patient_id = st.text_input("Patient ID")
+        diagnosis = st.text_input("Diagnosis")
+        notes = st.text_area("Notes")
+        if st.button("Add Medical Record"):
+            result = add_data("medical_record", patient_id=patient_id, diagnosis=diagnosis, notes=notes)
+            st.success(result)
+
+    elif data_type == "transaction":
+        transaction_id = st.text_input("Transaction ID")
+        patient_id = st.text_input("Patient ID")
+        amount = st.number_input("Amount", min_value=0.0, step=0.01)
+        if st.button("Add Transaction"):
+            result = add_data("transaction", transaction_id=transaction_id, patient_id=patient_id, amount=amount)
+            st.success(result)
+
+    elif data_type == "supply_chain":
+        drug_id = st.text_input("Drug ID")
+        location = st.text_input("Location")
+        status = st.text_input("Status")
+        if st.button("Add Supply Chain Event"):
+            result = add_data("supply_chain", drug_id=drug_id, location=location, status=status)
+            st.success(result)
+
+elif options == "Retrieve Data from Blockchain":
+    st.subheader("Retrieve Data from Blockchain")
+    
+    data_type = st.selectbox(
+        "Select Data Type to Retrieve",
+        ["patient", "medical_record", "transaction", "supply_chain"]
+    )
+
     if st.button("Retrieve Data"):
         data = retrieve_data(data_type)
-        st.json(data)
+        if isinstance(data, list) and data:
+            st.write(f"Data for type '{data_type}':")
+            for item in data:
+                st.json(item)
+        else:
+            st.info(data)
 
-elif options == "Clear Central Data Storage":
-    st.subheader("Clear All Data in Central Storage")
+elif options == "Clear Blockchain Data":
+    st.subheader("Clear All Blockchain Data")
     if st.button("Clear Data"):
         result = clear_all_data()
-        st.write(result)
+        st.success(result)
 
 
 # Digital Transaction Actions
